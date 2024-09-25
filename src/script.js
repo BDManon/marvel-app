@@ -10,6 +10,16 @@ async function getCharacters() {
   
       const data = await response.json();
       console.log(data); // Affiche les données dans la console
+
+      // Afficher les noms du JSON en li (à la place du html)
+      // Récupérer l'élément ul avec l'ID "characters"
+      const charactersList = document.getElementById('characters');
+      // Parcourir les données et créer un élément li pour chaque personnage
+      data.forEach(character => {
+        const li = document.createElement('li');
+        li.textContent = character.name; // Assurez-vous que les objets dans le JSON ont un attribut 'name'
+        charactersList.appendChild(li);
+      });
   
     } catch (error) {
       console.error('Erreur:', error);
