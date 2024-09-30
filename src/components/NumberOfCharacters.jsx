@@ -1,5 +1,5 @@
 
-export function NumberOfCharacters({characters}) {
+export function NumberOfCharacters({characters = []}) {
     let message
     const nbCharacter = characters.length
     if (nbCharacter=== 0) {
