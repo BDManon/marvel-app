@@ -1,16 +1,16 @@
 
 export function NumberOfCharacters({characters}) {
     let message
-
-    if (characters.length === 0) {
+    const nbCharacter = characters.length
+    if (nbCharacter=== 0) {
         message ="There is no character";
     } else {
-        message = `There are ${characters.length} characters`;
+        message = `There are ${nbCharacter} characters`;
     }
     
     return (
-        <div>
+        <p>
             {message}
-        </div>
+        </p>
     )
   }
