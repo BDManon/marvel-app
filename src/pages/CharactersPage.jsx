@@ -1,36 +1,25 @@
-import { CharactersList } from '../components/CharactersList'
-import { NumberOfCharacters } from '../components/NumberOfCharacters'
-import characters from '../data/characters.json'
+import React from 'react';
+import { CharactersList } from "../components/CharactersList";
+import { NumberOfCharacters } from "../components/NumberOfCharacters";
+import { getCharacters } from '../api/characters-api';
+import { useLoaderData } from 'react-router';
 
+// import characters from '../data/characters.json';
 
+const CharactersPage = () => {
+    // change the title of the page
+    document.title = "Marvel App";
 
-export default function CharactersPage() {
+    const characters = useLoaderData();
 
-    document.title = "About Us | Marvel Characters"
-      return (
+    return (
         <>
             <h2>Marvel Characters</h2>
-            <CharactersList  characters={characters}/>
-            <NumberOfCharacters  characters={characters}/>
+            <CharactersList characters={characters} />
+            <br />
+            <NumberOfCharacters characters={characters} />
         </>
-      );
-    }
-  
+    );
+};
 
-
-
-// AUTRE VERSION
-
-// const CharactersPage = () => {
-
-//     document.title = "Marvel Characters"
-//       return (
-//         <>
-//             <h1>Marvel Characters</h1>
-//             <CharactersList  characters={characters}/>
-//             <NumberOfCharacters  characters={characters}/>
-//         </>
-//       );
-//     }
-
-// export default CharactersPage;
+export default CharactersPage;
