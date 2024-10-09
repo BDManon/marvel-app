@@ -1,7 +1,7 @@
 
 import { getCharacterById, getCharacters } from "./api/characters-api";
 import CharacterDetailPage from "./pages/CharacterDetailPage";
-import Layout from "./Layout-a";
+import Layout from "./Layout";
 import AboutPage from "./pages/AboutPage";
 import CharactersPage from "./pages/CharactersPage";
 import ContactPage from "./pages/ContactPage";
