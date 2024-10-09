@@ -1,5 +1,5 @@
 
-const CharacterDetail = ({ character }) => {
+const CharacterDetail = ({ character ={} }) => {
     return (
         <>
             <h2>{character.name}</h2>
