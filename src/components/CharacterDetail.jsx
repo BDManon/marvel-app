@@ -1,4 +1,3 @@
-
 const CharacterDetail = ({ character ={} }) => {
     return (
         <>
