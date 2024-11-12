@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\api\characters-api.test.js">
+    <testCase name="getCharacters should return the list of characters" duration="7"/>
+    <testCase name="getCharacterById should return the correct character when a valid ID is provided" duration="1"/>
+    <testCase name="getCharacterById should throw an error when an invalid ID is provided" duration="8"/>
+  </file>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\pages\CharacterDetailPage.test.jsx">
+    <testCase name="CharacterDetailPage Component renders &quot;loading...&quot; when character data is not loaded" duration="32"/>
+    <testCase name="CharacterDetailPage Component renders CharacterDetail component when character data is loaded" duration="5"/>
+  </file>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\components\NumberOfCharacters.test.js">
+    <testCase name="renders &quot;There is no character&quot; when characters array is empty" duration="26"/>
+    <testCase name="renders the correct number of characters when characters array is not empty" duration="2"/>
+    <testCase name="renders &quot;There is no character&quot; when no characters are provided" duration="2"/>
+  </file>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\components\CharactersList.test.jsx">
+    <testCase name="CharactersList Component renders correctly with non-empty characters array" duration="33"/>
+    <testCase name="CharactersList Component generates correct links for each character" duration="7"/>
+  </file>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\pages\AboutPage.test.jsx">
+    <testCase name="AboutPage Component renders correctly" duration="32"/>
+    <testCase name="AboutPage Component sets document title correctly" duration="2"/>
+  </file>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\pages\ContactPage.test.jsx">
+    <testCase name="ContactPage Component renders correctly" duration="31"/>
+    <testCase name="ContactPage Component sets document title correctly" duration="5"/>
+    <testCase name="ContactPage Component renders contact email link correctly" duration="4"/>
+  </file>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\pages\CharactersPage.test.js">
+    <testCase name="render CharactersPage component" duration="62"/>
+  </file>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\components\CharacterDetail.test.jsx">
+    <testCase name="CharacterDetail Component renders correctly with an empty character object" duration="24"/>
+    <testCase name="CharacterDetail Component renders character details correctly" duration="4"/>
+    <testCase name="CharacterDetail Component renders image correctly when thumbnail is provided" duration="5"/>
+  </file>
+</testExecutions>
