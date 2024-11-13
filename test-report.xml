@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testExecutions version="1">
-  <file path="C:\Users\mbonna13\Documents\marvel-app\src\components\CharactersList.test.jsx">
-    <testCase name="CharactersList Component renders correctly with non-empty characters array" duration="26"/>
-    <testCase name="CharactersList Component generates correct links for each character" duration="0"/>
-  </file>
-</testExecutions>
