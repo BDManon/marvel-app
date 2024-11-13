@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\mbonna13\Documents\marvel-app\src\pages\CharactersPage.test.jsx">
-    <testCase name="render CharactersPage component" duration="51"/>
-  </file>
-  <file path="C:\Users\mbonna13\Documents\marvel-app\src\components\NumberOfCharacters.test.jsx">
-    <testCase name="renders &quot;There is no character&quot; when characters array is empty" duration="20"/>
-    <testCase name="renders the correct number of characters when characters array is not empty" duration="2"/>
-    <testCase name="renders &quot;There is no character&quot; when no characters are provided" duration="1"/>
+  <file path="C:\Users\mbonna13\Documents\marvel-app\src\components\CharactersList.test.jsx">
+    <testCase name="CharactersList Component renders correctly with non-empty characters array" duration="26"/>
+    <testCase name="CharactersList Component generates correct links for each character" duration="0"/>
   </file>
 </testExecutions>
