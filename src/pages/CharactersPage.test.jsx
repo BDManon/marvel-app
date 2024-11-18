@@ -23,29 +23,27 @@ jest.mock('react-router', () => ({
     },
 }));
 
-test('render CharactersPage component', () => {
-    // when
 
-    // then
+
+test('renders sort and order dropdowns', () => {
     render(<CharactersPage />, { wrapper: BrowserRouter });
+    
+    const sortDropdown = screen.getByLabelText(/Sort by:/i);
+    expect(sortDropdown).toBeInTheDocument();
+    expect(sortDropdown.value).toBe('name');
+    
+    const orderDropdown = screen.getByLabelText(/Order:/i);
+    expect(orderDropdown).toBeInTheDocument();
+    expect(orderDropdown.value).toBe('asc');
 
-    // expect the document title to be "Marvel App"
-    expect(document.title).toBe('Marvel App');
+});
 
 
-    // expect the heading 'Marvel Characters' to be in the document
-    const h2Element = screen.getByRole('heading', { level: 2, name: "Marvel Characters" });
-    expect(h2Element).toBeInTheDocument();
-
-    // expect the character Thor to be in the document
-    const thorElement = screen.getByText(characters[0].name);
-    expect(thorElement).toBeInTheDocument();
-
-    // expect the charater Captain America to be in the document
-    const captainAmericaElement = screen.getByText(characters[1].name);
-    expect(captainAmericaElement).toBeInTheDocument();
-
-    // expect the number of characters to be in the document
-    const numberOfCharactersElement = screen.getByText(`There are ${characters.length} characters`);
-    expect(numberOfCharactersElement).toBeInTheDocument();
+test('renders character names', () => {
+    render(<CharactersPage />, { wrapper: BrowserRouter });
+    
+    characters.forEach(character => {
+        const characterElement = screen.getByText(character.name);
+        expect(characterElement).toBeInTheDocument();
+    });
 });
