@@ -1,13 +1,15 @@
 import characters from '../data/characters.json';
 
+export const DEFAULT_SORT = 'name';
+export const DEFAULT_ORDER = 'asc';
 
 // Fonction qui retourne la liste des personnages triée
-export function getCharacters({ sort = 'name', order = 'asc' } = {}) {
+export function getCharacters({ sort = DEFAULT_SORT, order = DEFAULT_ORDER } = {}) {
     // console.log('sortBy', sort);
     // console.log('sortDirection', order);
     return characters.slice().sort((a, b) => {
-        if (sort === 'name') {
-            if (order === 'asc') {
+        if (sort === DEFAULT_SORT) {
+            if (order === DEFAULT_ORDER) {
                 return a.name.localeCompare(b.name);
             } else {
                 return b.name.localeCompare(a.name);
