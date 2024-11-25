@@ -48,7 +48,7 @@ test('renders sort and order dropdowns', () => {
     const order ='desc';
 
     render(
-        <MemoryRouter initialEntries={[`/?order=modified&sort=desc`]}>
+        <MemoryRouter initialEntries={[`/?sort=modified&order=desc`]}>
             <CharactersPage />
         </MemoryRouter>
     )
@@ -90,6 +90,6 @@ test('renders number of characters', () => {
     
     const numberOfCharacters = screen.getByText(/There are \d+ characters/i);
     expect(numberOfCharacters).toBeInTheDocument();
-    expect(numberOfCharacters).toHaveTextContent('There are 11 characters');
+    expect(numberOfCharacters).toHaveTextContent(`There are ${characters.length} characters`);
 });
 
