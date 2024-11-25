@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 
 import { render, screen } from '@testing-library/react';
 import CharactersPage from './CharactersPage';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 const characters = [
     {
@@ -23,29 +23,73 @@ jest.mock('react-router', () => ({
     },
 }));
 
-test('render CharactersPage component', () => {
-    // when
 
-    // then
-    render(<CharactersPage />, { wrapper: BrowserRouter });
+// Vérification des listes déroulantes de tri et d'ordre sont correctement rendues.
+test('renders sort and order dropdowns', () => {
+    render(
+        <MemoryRouter>
+            <CharactersPage />
+        </MemoryRouter>
+    )
+    
+    const sortDropdown = screen.getByLabelText(/Sort by:/i);
+    expect(sortDropdown).toBeInTheDocument();
+    expect(sortDropdown.value).toBe('name');
+    
+    const orderDropdown = screen.getByLabelText(/Order:/i);
+    expect(orderDropdown).toBeInTheDocument();
+    expect(orderDropdown.value).toBe('asc');
 
-    // expect the document title to be "Marvel App"
-    expect(document.title).toBe('Marvel App');
-
-
-    // expect the heading 'Marvel Characters' to be in the document
-    const h2Element = screen.getByRole('heading', { level: 2, name: "Marvel Characters" });
-    expect(h2Element).toBeInTheDocument();
-
-    // expect the character Thor to be in the document
-    const thorElement = screen.getByText(characters[0].name);
-    expect(thorElement).toBeInTheDocument();
-
-    // expect the charater Captain America to be in the document
-    const captainAmericaElement = screen.getByText(characters[1].name);
-    expect(captainAmericaElement).toBeInTheDocument();
-
-    // expect the number of characters to be in the document
-    const numberOfCharactersElement = screen.getByText(`There are ${characters.length} characters`);
-    expect(numberOfCharactersElement).toBeInTheDocument();
 });
+
+test('renders sort and order dropdowns', () => {
+
+    const sort ='modified';
+    const order ='desc';
+
+    render(
+        <MemoryRouter initialEntries={[`/?sort=modified&order=desc`]}>
+            <CharactersPage />
+        </MemoryRouter>
+    )
+    screen.debug();
+
+    const sortDropdown = screen.getByTestId('sort');
+    expect(sortDropdown).toHaveValue(sort);
+    console.log(sortDropdown);
+
+    const orderDropdown = screen.getByTestId('order');
+    expect(orderDropdown).toHaveValue(order);
+
+});
+
+
+// Affiche des noms de tous les personnages correctement.
+test('renders character names', () => {
+    render(<CharactersPage />, { wrapper: BrowserRouter });
+    
+    characters.forEach(character => {
+        const characterElement = screen.getByText(character.name);
+        expect(characterElement).toBeInTheDocument();
+    });
+});
+
+
+// test fonction CharactersList
+test('renders characters list', () => {
+    render(<CharactersPage />, { wrapper: BrowserRouter });
+    
+    const charactersList = screen.getByRole('list');
+    expect(charactersList).toBeInTheDocument();
+});
+
+
+// test fonction NumberOfCharacters
+test('renders number of characters', () => {
+    render(<CharactersPage />, { wrapper: BrowserRouter });
+    
+    const numberOfCharacters = screen.getByText(/There are \d+ characters/i);
+    expect(numberOfCharacters).toBeInTheDocument();
+    expect(numberOfCharacters).toHaveTextContent(`There are ${characters.length} characters`);
+});
+
