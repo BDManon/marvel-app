@@ -7,6 +7,11 @@ import RechartsPieChart from '../components/RechartsPieChart';
 
 const CharacterDetailPage = () => {
     const character = useLoaderData();
+    if (!character) {
+
+        return <div>loading...</div>;
+
+    }
     return (
         <>
              {character ? <CharacterDetail character={character}/> : 'loading...'} {/* affiche le composant CharacterDetail si le personnage est chargé, sinon affiche "loading..." */}

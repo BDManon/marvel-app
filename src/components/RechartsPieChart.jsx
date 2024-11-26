@@ -10,14 +10,14 @@ const RechartsPieChart = ({ data }) => {
     const prepareData2 = prepareData(data);
     
     return (
-        <PieChart width={400} height={400}>
+        <PieChart width={250} height={350}>
             <Pie
                 data={prepareData2}
-                cx={200}
-                cy={200}
-                innerRadius={60}
+                cx={100}
+                cy={100}
+                innerRadius={50}
                 outerRadius={80}
-                paddingAngle={5}
+                paddingAngle={2}
                 dataKey="value"
                 nameKey="name"
                 label

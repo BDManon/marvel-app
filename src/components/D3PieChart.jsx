@@ -23,11 +23,13 @@ const drawChart = (data) => {
         .select('svg')
         .remove();
 
+
     // TODO: draw the chart here base on example https://observablehq.com/@d3/donut-chart/2
     // Create the color scale
     const color = d3.scaleOrdinal()
         .domain(data.map(d => d.name))
         .range(d3.schemeCategory10);
+        // .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse());
 
     // Create the pie chart
     const pie = d3.pie()
@@ -38,7 +40,9 @@ const drawChart = (data) => {
     // Create the arc
     const arc = d3.arc()
         .innerRadius(radius * 0.5)         // This is the size of the donut hole
-        .outerRadius(radius * 0.8);
+        .outerRadius(radius * 0.8)
+        .cornerRadius(5)
+        .padAngle(0.011);
 
     // Create the svg, with the right dimensions
     const svg = d3.select('#pie-container')
@@ -66,6 +70,7 @@ const drawChart = (data) => {
         .join("text")
             .attr("transform", d => `translate(${arc.centroid(d)})`)
             .call(text => text.append("tspan")
+                .attr("x", 0)
                 .attr("y", "-0.4em")
                 // .attr("font-weight", "bold")
                 .text(d => d.data.name))

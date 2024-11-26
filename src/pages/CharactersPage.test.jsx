@@ -1,6 +1,8 @@
-import '@testing-library/jest-dom';
+// FILE: src/pages/CharactersPage.test.jsx
 
-import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import CharactersPage from './CharactersPage';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
@@ -23,73 +25,99 @@ jest.mock('react-router', () => ({
     },
 }));
 
+describe('CharactersPage Component', () => {
 
-// Vérification des listes déroulantes de tri et d'ordre sont correctement rendues.
-test('renders sort and order dropdowns', () => {
-    render(
-        <MemoryRouter>
-            <CharactersPage />
-        </MemoryRouter>
-    )
-    
-    const sortDropdown = screen.getByLabelText(/Sort by:/i);
-    expect(sortDropdown).toBeInTheDocument();
-    expect(sortDropdown.value).toBe('name');
-    
-    const orderDropdown = screen.getByLabelText(/Order:/i);
-    expect(orderDropdown).toBeInTheDocument();
-    expect(orderDropdown.value).toBe('asc');
-
-});
-
-test('renders sort and order dropdowns', () => {
-
-    const sort ='modified';
-    const order ='desc';
-
-    render(
-        <MemoryRouter initialEntries={[`/?sort=modified&order=desc`]}>
-            <CharactersPage />
-        </MemoryRouter>
-    )
-    screen.debug();
-
-    const sortDropdown = screen.getByTestId('sort');
-    expect(sortDropdown).toHaveValue(sort);
-    console.log(sortDropdown);
-
-    const orderDropdown = screen.getByTestId('order');
-    expect(orderDropdown).toHaveValue(order);
-
-});
-
-
-// Affiche des noms de tous les personnages correctement.
-test('renders character names', () => {
-    render(<CharactersPage />, { wrapper: BrowserRouter });
-    
-    characters.forEach(character => {
-        const characterElement = screen.getByText(character.name);
-        expect(characterElement).toBeInTheDocument();
+    test('renders correctly', () => {
+        render(
+            <MemoryRouter>
+                <CharactersPage />
+            </MemoryRouter>
+        );
+        expect(screen.getByText('Marvel Characters')).toBeInTheDocument();
     });
+
+    test('renders sort and order dropdowns', () => {
+        render(
+            <MemoryRouter>
+                <CharactersPage />
+            </MemoryRouter>
+        );
+        
+        const sortDropdown = screen.getByLabelText(/Sort by:/i);
+        expect(sortDropdown).toBeInTheDocument();
+        expect(sortDropdown.value).toBe('name');
+        
+        const orderDropdown = screen.getByLabelText(/Order:/i);
+        expect(orderDropdown).toBeInTheDocument();
+        expect(orderDropdown.value).toBe('asc');
+    });
+
+    test('renders sort and order dropdowns with initial values', () => {
+        const sort ='modified';
+        const order ='desc';
+
+        render(
+            <MemoryRouter initialEntries={[`/?sort=modified&order=desc`]}>
+                <CharactersPage />
+            </MemoryRouter>
+        );
+
+        const sortDropdown = screen.getByTestId('sort');
+        expect(sortDropdown).toHaveValue(sort);
+
+        const orderDropdown = screen.getByTestId('order');
+        expect(orderDropdown).toHaveValue(order);
+    });
+
+    test('renders character names', () => {
+        render(<CharactersPage />, { wrapper: BrowserRouter });
+        
+        characters.forEach(character => {
+            const characterElement = screen.getByText(character.name);
+            expect(characterElement).toBeInTheDocument();
+        });
+    });
+
+    test('renders characters list', () => {
+        render(<CharactersPage />, { wrapper: BrowserRouter });
+        
+        const charactersList = screen.getByRole('list');
+        expect(charactersList).toBeInTheDocument();
+    });
+
+    test('renders number of characters', () => {
+        render(<CharactersPage />, { wrapper: BrowserRouter });
+        
+        const numberOfCharacters = screen.getByText(/There are \d+ characters/i);
+        expect(numberOfCharacters).toBeInTheDocument();
+        expect(numberOfCharacters).toHaveTextContent(`There are ${characters.length} characters`);
+    });
+
+    test('changes sort and order', () => {
+        render(
+            <MemoryRouter>
+                <CharactersPage />
+            </MemoryRouter>
+        );
+
+        const sortDropdown = screen.getByTestId('sort');
+        const orderDropdown = screen.getByTestId('order');
+
+        fireEvent.change(sortDropdown, { target: { value: 'modified' } });
+        expect(sortDropdown).toHaveValue('modified');
+
+        fireEvent.change(orderDropdown, { target: { value: 'desc' } });
+        expect(orderDropdown).toHaveValue('desc');
+    });
+
+    test('sets document title', () => {
+        render(
+            <MemoryRouter>
+                <CharactersPage />
+            </MemoryRouter>
+        );
+
+        expect(document.title).toBe('Marvel App');
+    });
+
 });
-
-
-// test fonction CharactersList
-test('renders characters list', () => {
-    render(<CharactersPage />, { wrapper: BrowserRouter });
-    
-    const charactersList = screen.getByRole('list');
-    expect(charactersList).toBeInTheDocument();
-});
-
-
-// test fonction NumberOfCharacters
-test('renders number of characters', () => {
-    render(<CharactersPage />, { wrapper: BrowserRouter });
-    
-    const numberOfCharacters = screen.getByText(/There are \d+ characters/i);
-    expect(numberOfCharacters).toBeInTheDocument();
-    expect(numberOfCharacters).toHaveTextContent(`There are ${characters.length} characters`);
-});
-

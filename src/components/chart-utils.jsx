@@ -22,3 +22,19 @@ export function prepareData(data = {}) {
   
     return transformedData;
   }
+
+
+  // Version du prof
+  
+// export const prepareChartData = (data = {}) => {
+//   const transformedData = [
+//     { name: 'Force', value: data.force },
+//     { name: 'Intelligence', value: data.intelligence },
+//     { name: 'Energy', value: data.energy },
+//     { name: 'Speed', value: data.speed },
+//     { name: 'Durability', value: data.durability },
+//     { name: 'Fighting', value: data.fighting },
+//   ];
+
+//   return transformedData.filter((element) => element.value !== undefined); 
+// }
