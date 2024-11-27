@@ -1,5 +1,5 @@
 //affiche la page de détail d'un personnage, qui elle-même utilise un composant CharacterDetail pour afficher les détails du personnages.
-import React from 'react';
+import React, { useEffect } from 'react';
 import CharacterDetail from '../components/CharacterDetail';
 import { useLoaderData } from 'react-router';
 import D3PieChart from '../components/D3PieChart';
@@ -7,6 +7,13 @@ import RechartsPieChart from '../components/RechartsPieChart';
 
 const CharacterDetailPage = () => {
     const character = useLoaderData();
+
+    useEffect(() => {
+        if(character){
+            document.title = `${character.name} | Marvel App`;
+        }
+    }, [character]);
+
     if (!character) {
 
         return <div>loading...</div>;
