@@ -76,8 +76,8 @@ describe('CharactersPage Component', () => {
         render(<CharactersPage />, { wrapper: BrowserRouter });
         
         characters.forEach(character => {
-            const characterElement = screen.getByText((content, element) => {
-                return element.tagName.toLowerCase() === 'a' && content.includes(character.name);
+            const characterElement = screen.getByText((_, element) => {
+                return element.tagName.toLowerCase() === 'a' && element.textContent.includes(character.name);
             });
             expect(characterElement).toBeInTheDocument();
         });
