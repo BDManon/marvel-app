@@ -5,11 +5,11 @@ export function CharactersList({characters = []}) {
     return (
     <ul id="characters">
         {characters.map((character) => {
-            const formattedDate = format(new Date(character.modified), 'MMM dd, yyyy');
+            const formattedDate = character.modified ? format(new Date(character.modified), 'MMM dd, yyyy') : 'N/A';
             return (
                 <li key={character.id}> 
                     <Link to={`/characters/${character.id}`}> 
-                        {character.name} (<small><strong>{formattedDate}</strong></small>)
+                        {character.name} - <small><strong>{formattedDate}</strong></small>
                     </Link>
                 </li>
             );

@@ -5,15 +5,18 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CharactersPage from './CharactersPage';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { da } from 'date-fns/locale';
 
 const characters = [
     {
         id: "1",
-        name: "Thor"
+        name: "Thor",
+        date: "2021-09-01T00:00:00Z"
     },
     {
         id: "2",
-        name: "Captain America"
+        name: "Captain America",
+        date: "2021-09-02T00:00:00Z"
     }
 ];
 
@@ -73,7 +76,9 @@ describe('CharactersPage Component', () => {
         render(<CharactersPage />, { wrapper: BrowserRouter });
         
         characters.forEach(character => {
-            const characterElement = screen.getByText(character.name);
+            const characterElement = screen.getByText((content, element) => {
+                return element.tagName.toLowerCase() === 'a' && content.includes(character.name);
+            });
             expect(characterElement).toBeInTheDocument();
         });
     });
