@@ -9,7 +9,7 @@ export function CharactersList({characters = []}) {
             return (
                 <li key={character.id}> 
                     <Link to={`/characters/${character.id}`}> 
-                        {character.name} - <small><strong>{formattedDate}</strong></small>
+                    <strong>{character.name}</strong> - <small>{formattedDate}</small>
                     </Link>
                 </li>
             );

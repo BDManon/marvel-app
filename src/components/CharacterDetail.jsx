@@ -9,7 +9,7 @@ const CharacterDetail = ({ character ={} }) => {
             { character.thumbnail && <img src={`${character.thumbnail.path}/standard_large.${character.thumbnail.extension}`} alt={character.name} /> }
 
             <p>{character.description}</p>
-            <p>Date de modification : <small><strong>{formattedDate}</strong></small></p>
+            <p>Date de modification : <strong>{formattedDate}</strong></p>
             {/* Add more details here */}
         </>
     );
