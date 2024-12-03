@@ -1,5 +1,7 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from 'recharts';
+import RadarChartComponent from '../components/RadarChart';
 
 const CompareCharactersPage = () => {
     // change the title of the page
@@ -29,7 +31,6 @@ const CompareCharactersPage = () => {
         width: 500,
     };
 
-    
 
     return (
         <>
@@ -60,7 +61,10 @@ const CompareCharactersPage = () => {
                     ))}
                 </select>
             </p>
+        
+        <RadarChartComponent characters={characters} option1={option1} option2={option2} />
             
+
         </>
     );
 };
