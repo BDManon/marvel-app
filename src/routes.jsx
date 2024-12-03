@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import AboutPage from "./pages/AboutPage";
 import CharactersPage from "./pages/CharactersPage";
 import ContactPage from "./pages/ContactPage";
+import ComparePage from "./pages/comparePage";
 
 const routes = [
     {
@@ -27,6 +28,9 @@ const routes = [
                 element: <CharacterDetailPage />,
                 loader: ({ params }) => getCharacterById(params.id)
             },
+            { path: "/compare", element: <ComparePage />,
+                loader: () => getCharacters()
+             },
             { path: "/about", element: <AboutPage /> },
             { path: "/contact", element: <ContactPage /> },
         ],
