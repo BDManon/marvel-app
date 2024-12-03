@@ -4,8 +4,8 @@ import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend }
 const RadarChartComponent = ({ characters, option1, option2 }) => {
     const data = Object.keys(characters[option1.value].capacities).map((key) => ({
         subject: key,
-        [characters[option1.value].name]: characters[option1.value].capacities[key],
-        [characters[option2.value].name]: characters[option2.value].capacities[key],
+        [characters[option1.value].name]: characters[option1.value].capacities[key] || 0,
+        [characters[option2.value].name]: characters[option2.value].capacities[key] || 0,
     }));
 
     return (

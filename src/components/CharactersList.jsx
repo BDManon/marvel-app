@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 
 export function CharactersList({characters = []}) {
+    if (characters.length === 0) {
+        return <p>No characters available</p>;
+    }
+
     return (
     <ul id="characters">
         {characters.map((character) => {

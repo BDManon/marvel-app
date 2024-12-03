@@ -1,11 +1,8 @@
-// FILE: src/components/CharactersList.test.jsx
-
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CharactersList } from './CharactersList';
-import { da } from 'date-fns/locale';
 
 describe('CharactersList Component', () => {
 
@@ -35,7 +32,64 @@ describe('CharactersList Component', () => {
       </Router>
     );
 
-    expect(getByText((content, element) => content.includes('Character One')).closest('a')).toHaveAttribute('href', '/characters/1');
-    expect(getByText((content, element) => content.includes('Character Two')).closest('a')).toHaveAttribute('href', '/characters/2');
+    expect(getByText('Character One').closest('a')).toHaveAttribute('href', '/characters/1');
+    expect(getByText('Character Two').closest('a')).toHaveAttribute('href', '/characters/2');
+  });
+
+  test('renders correctly with empty characters array', () => {
+    const characters = [];
+    render(
+      <Router>
+        <CharactersList characters={characters} />
+      </Router>
+    );
+
+    expect(screen.getByText('No characters available')).toBeInTheDocument();
+  });
+
+  test('renders character names in the correct order', () => {
+    const characters = [
+      { id: 1, name: 'Character One' },
+      { id: 2, name: 'Character Two' },
+      { id: 3, name: 'Character Three' },
+    ];
+    render(
+      <Router>
+        <CharactersList characters={characters} />
+      </Router>
+    );
+
+    const characterNames = screen.getAllByRole('link').map(link => link.textContent);
+    expect(characterNames).toEqual(['Character One - N/A', 'Character Two - N/A', 'Character Three - N/A']);
+  });
+
+  test('renders character names with special characters', () => {
+    const characters = [
+      { id: 1, name: 'Character One!' },
+      { id: 2, name: 'Character Two@' },
+    ];
+    render(
+      <Router>
+        <CharactersList characters={characters} />
+      </Router>
+    );
+
+    expect(screen.getByText('Character One!')).toBeInTheDocument();
+    expect(screen.getByText('Character Two@')).toBeInTheDocument();
+  });
+
+  test('renders character names with long names', () => {
+    const characters = [
+      { id: 1, name: 'Character One with a very long name that exceeds normal length' },
+      { id: 2, name: 'Character Two with another very long name that exceeds normal length' },
+    ];
+    render(
+      <Router>
+        <CharactersList characters={characters} />
+      </Router>
+    );
+
+    expect(screen.getByText('Character One with a very long name that exceeds normal length')).toBeInTheDocument();
+    expect(screen.getByText('Character Two with another very long name that exceeds normal length')).toBeInTheDocument();
   });
 });
