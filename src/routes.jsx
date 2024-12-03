@@ -28,7 +28,9 @@ const routes = [
                 element: <CharacterDetailPage />,
                 loader: ({ params }) => getCharacterById(params.id)
             },
-            { path: "/compare", element: <ComparePage /> },
+            { path: "/compare", element: <ComparePage />,
+                loader: () => getCharacters()
+             },
             { path: "/about", element: <AboutPage /> },
             { path: "/contact", element: <ContactPage /> },
         ],
